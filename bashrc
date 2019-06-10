@@ -1,10 +1,8 @@
-# bash configuration
-bind 'set completion-ignore-case on'
-bind 'set show-all-if-ambiguous on'
-bind 'TAB:menu-complete'
-
-# environment variables
+# PATH
 export PATH="${HOME}/.local/bin:${HOME}/bin:${PATH}"
+
+# EDITOR
+command -v vim &> /dev/null && export EDITOR=vim || export EDITOR=vi
 
 # aliases
 alias ls='ls --color=auto'
