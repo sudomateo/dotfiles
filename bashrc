@@ -1,15 +1,9 @@
-# PATH
-export PATH="${HOME}/.local/bin:${HOME}/bin:${PATH}"
-
-# EDITOR
-command -v vim &> /dev/null && export EDITOR=vim || export EDITOR=vi
-
-# aliases
+# Aliases
 alias ls='ls --color=auto'
 alias l='ls -la'
 alias ll='ls -l'
 
-# shell prompt
+# Shell prompt
 function __set_ps1() {
   local git_prompt_files=(
     "/usr/share/git/git-prompt.sh"
@@ -31,7 +25,18 @@ function __set_ps1() {
       
 __set_ps1
 
-# local bashrc
+# EDITOR
+command -v vim &> /dev/null && export EDITOR=vim || export EDITOR=vi
+
+# Golang
+mkdir -p ${HOME}/go/{bin,pkg,src} &> /dev/null
+export GOPATH=${HOME}/go
+export GOBIN=${GOPATH}/bin
+
+# PATH
+export PATH="${HOME}/.local/bin:${HOME}/bin:${GOBIN}:${PATH}"
+
+# Local overrides
 if [[ -f "${HOME}/.bashrc.local" ]]; then
   source "${HOME}/.bashrc.local"
 fi

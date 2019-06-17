@@ -19,4 +19,4 @@ MPL-2.0
 
 ## Author Information
 
-Created by [Matthew Sanabria](https://www.linkedin.com/in/sudomateo)
+Created by [Matthew Sanabria](https://www.linkedin.com/in/sudomateo).
