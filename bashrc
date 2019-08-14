@@ -1,7 +1,13 @@
 # Aliases
+alias cp='cp -i'
+alias egrep='egrep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias grep='grep --color=auto'
+alias l='ls -la --color=auto'
+alias ll='ls -l --color=auto'
 alias ls='ls --color=auto'
-alias l='ls -la'
-alias ll='ls -l'
+alias mv='mv -i'
+alias rm='rm -i'
 
 # Shell prompt
 function __set_ps1() {
