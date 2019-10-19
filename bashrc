@@ -31,18 +31,5 @@ function __set_ps1() {
       
 __set_ps1
 
-# EDITOR
+# Editor
 command -v vim &> /dev/null && export EDITOR=vim || export EDITOR=vi
-
-# Golang
-mkdir -p ${HOME}/go/{bin,pkg,src} &> /dev/null
-export GOPATH=${HOME}/go
-export GOBIN=${GOPATH}/bin
-
-# PATH
-export PATH="${HOME}/.local/bin:${HOME}/bin:${GOBIN}:${PATH}"
-
-# Local overrides
-if [[ -f "${HOME}/.bashrc.local" ]]; then
-  source "${HOME}/.bashrc.local"
-fi
