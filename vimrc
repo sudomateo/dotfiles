@@ -9,6 +9,7 @@ set backspace=indent,eol,start      " allow backspacing over indent, line breaks
 set nobackup                        " keep a backup file
 set colorcolumn=81,121              " set a column marker
 set cursorline                      " underline the current line where the cursor is
+set noerrorbells                    " do not make error noises
 set expandtab                       " use spaces in place of tabs
 set foldenable                      " enable collapsing of lines
 set hidden                          " allow buffers to remain loaded
@@ -17,7 +18,8 @@ set hlsearch                        " highlight searches
 set ignorecase                      " ignore case in searches
 set incsearch                       " highlight searches while typing
 set linespace=0                     " number of pixel lines in between characters
-set nonumber                        " show line numbers
+set mouse=a                         " use a mouse for all modes
+set number                          " show line numbers
 set ruler                           " show the ruler
 set scrolljump=5                    " number of lines to jump when scrolling
 set scrolloff=3                     " number of lines to keep above and below cursor
