@@ -1,0 +1,4 @@
+# rofi configuration file.
+
+# Use the gruvbox theme.
+rofi.theme: /usr/share/rofi/themes/gruvbox-dark.rasi
