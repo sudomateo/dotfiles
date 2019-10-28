@@ -1,1 +1,4 @@
-EXCLUDES="README.md LICENSE setup.sh"
+# rcm configuration file.
+
+# Exclude these files from being managed by `rcm`.
+EXCLUDES="README.md LICENSE internal"

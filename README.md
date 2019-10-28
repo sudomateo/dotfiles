@@ -2,7 +2,7 @@
 
 ## Requirements
 
-* git
+* [git](https://git-scm.com)
 * [rcm](https://github.com/thoughtbot/rcm)
 
 ## Installation 
@@ -10,7 +10,7 @@
 Clone this repo to `${HOME}/.dotfiles` and run the following.
 
 ```
-./setup.sh
+${HOME}/.dotfiles/internal/setup.sh
 ```
 
 ## License
