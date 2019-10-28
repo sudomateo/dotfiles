@@ -1,4 +1,6 @@
-# Aliases
+# Bashrc file.
+
+# Command alias.
 alias cp='cp -i'
 alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
@@ -9,7 +11,7 @@ alias ls='ls --color=auto'
 alias mv='mv -i'
 alias rm='rm -i'
 
-# Shell prompt
+# Define shell prompt.
 function __set_ps1() {
   local git_prompt_files=(
     "/usr/share/git/git-prompt.sh"
@@ -28,8 +30,34 @@ function __set_ps1() {
     fi
   done
 }
-      
+
+# Set shell prompt.
 __set_ps1
 
-# Editor
+# Add to PATH if not already there.
+function pathmunge () {
+  if [[ ":${PATH}:" != *":${1}:"* ]]; then
+    if [[ "${2}" == "post" ]]; then
+      export PATH="${PATH}:${1}"
+    else
+      export PATH="${1}:${PATH}"
+    fi
+  fi
+}
+
+# Set default editor.
 command -v vim &> /dev/null && export EDITOR=vim || export EDITOR=vi
+
+# Golang configuration.
+mkdir -p ${HOME}/go/{bin,pkg,src} &> /dev/null
+if [[ ${?} -eq 0 ]]; then
+  export GOPATH=${HOME}/go
+  export GOBIN=${GOPATH}/bin
+  pathmunge "${GOBIN}"
+fi
+
+# User-specific programs.
+mkdir -p ${HOME}/.local/bin &> /dev/null
+if [[ ${?} -eq 0 ]]; then
+  pathmunge "${HOME}/.local/bin"
+fi
