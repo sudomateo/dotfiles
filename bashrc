@@ -61,3 +61,8 @@ mkdir -p ${HOME}/.local/bin &> /dev/null
 if [[ ${?} -eq 0 ]]; then
   pathmunge "${HOME}/.local/bin"
 fi
+
+if [[ -n "${DESKTOP_SESSION}" ]];then
+  eval $(gnome-keyring-daemon --start)
+  export SSH_AUTH_SOCK
+fi

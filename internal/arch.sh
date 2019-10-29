@@ -27,6 +27,7 @@ pacmanPackages=(
   firefox
   fwupd
   git
+  gnome-keyring
   go
   i3-gaps
   i3blocks
@@ -39,6 +40,7 @@ pacmanPackages=(
   jq
   libnotify
   libreoffice-still
+  libsecret
   libvirt
   light
   lightdm
@@ -59,6 +61,7 @@ pacmanPackages=(
   qemu
   ripgrep
   rofi
+  seahorse
   sysfsutils
   thunar
   tmux
