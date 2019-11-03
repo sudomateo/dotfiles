@@ -40,6 +40,7 @@ pacmanPackages=(
   mdadm
   neofetch
   networkmanager
+  networkmanager-openvpn
   obs-studio
   openssh
   perl
