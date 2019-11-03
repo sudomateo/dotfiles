@@ -1,6 +1,6 @@
 # Bashrc file.
 
-# Command alias.
+# Command aliases.
 alias cp='cp -i'
 alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
@@ -9,7 +9,6 @@ alias l='ls -la --color=auto'
 alias ll='ls -l --color=auto'
 alias ls='ls --color=auto'
 alias mv='mv -i'
-alias rm='rm -i'
 
 # Define shell prompt.
 function __set_ps1() {
