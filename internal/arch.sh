@@ -1,50 +1,37 @@
 #!/bin/bash
 
-# dnsmasq
-# ebtables
-# noto-fonts
-# noto-fonts-cjk
-# noto-fonts-emoji
-# noto-fonts-extra
-
 # Pacman packages.
 pacmanPackages=(
   adobe-source-code-pro-fonts
-  alacritty
-  arandr
-  autorandr
   base
   base-devel
+  bash
+  bash-completion
   bind-tools
   binutils
   cryptsetup
+  dconf-editor
   device-mapper
   dmidecode
+  dnsmasq
   docker
   e2fsprogs
+  ebtables
   efivar
-  feh
   firefox
   fwupd
   git
-  gnome-keyring
+  gnome
+  gnome-software-packagekit-plugin
+  gnome-tweaks
   go
-  i3-gaps
-  i3blocks
-  i3lock
-  i3status
   inetutils
   intel-ucode
   iputils
   jfsutils
   jq
-  libnotify
   libreoffice-still
-  libsecret
   libvirt
-  light
-  lightdm
-  lightdm-gtk-greeter
   linux-firmware
   logrotate
   lvm2
@@ -52,52 +39,41 @@ pacmanPackages=(
   man-pages
   mdadm
   neofetch
-  network-manager-applet
   networkmanager
   obs-studio
   openssh
-  pavucontrol
   perl
   qemu
   ripgrep
-  rofi
-  seahorse
   sysfsutils
-  thunar
-  tmux
   tree
   usbutils
   vagrant
   vi
   vim
   xfsprogs
-  xorg-server
-  xorg-xrandr
 )
 
 yay_packages=(
   rcm
   slack-desktop
-  systemd-boot-pacman-hook
   zoom
 )
 
 sudo pacman -S --needed ${pacmanPackages[*]}
 
-# if !(command -v yay &> /dev/null); then
-#   git clone https://aur.archlinux.org/yay.git ${HOME}/yay
-#   $(cd ${HOME}; makepkg -sirc)
-# fi
+if !(command -v yay &> /dev/null); then
+  git clone https://aur.archlinux.org/yay.git ${HOME}/yay
+  $(cd ${HOME}/yay; makepkg -sirc)
+fi
 
-# for yayPackage in ${yayPackages[*]}; do
-#   yay ${yayPackage}
-# done
+for yayPackage in ${yayPackages[*]}; do
+  yay ${yayPackage}
+done
 
-# sudo systemctl enable autorandr 
-# sudo systemctl enable docker
-# sudo systemctl enable libvirtd 
-# sudo systemctl enable lightdm 
-# sudo systemctl enable NetworkManager 
+sudo systemctl enable docker
+sudo systemctl enable gdm
+sudo systemctl enable libvirtd
+sudo systemctl enable NetworkManager
 
-# Add user to audio, video, wheel groups
-# sudo usermod -aG audio,video,docker,wheel,libvirt 
+sudo usermod -aG docker,wheel,libvirt $(id -u -n)

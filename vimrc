@@ -49,9 +49,6 @@ set incsearch
 " Number of pixel lines in between characters.
 set linespace=0
 
-" Use a mouse for all modes
-set mouse=a
-
 " Show line numbers.
 set number
 

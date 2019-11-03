@@ -17,7 +17,6 @@ function __set_ps1() {
     "/usr/share/git/git-prompt.sh"
     "/usr/share/git/completion/git-prompt.sh"
   )
-  local git_prompt_file
   for git_prompt_file in ${git_prompt_files[*]}; do
     if [[ -f "${git_prompt_file}" ]]; then
       source "${git_prompt_file}"
@@ -60,9 +59,4 @@ fi
 mkdir -p ${HOME}/.local/bin &> /dev/null
 if [[ ${?} -eq 0 ]]; then
   pathmunge "${HOME}/.local/bin"
-fi
-
-if [[ -n "${DESKTOP_SESSION}" ]];then
-  eval $(gnome-keyring-daemon --start)
-  export SSH_AUTH_SOCK
 fi
