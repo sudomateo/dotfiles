@@ -1,6 +1,9 @@
 " Vim configuration file.
 " Documentation here: http://vimdoc.sourceforge.net/htmldoc.
 
+" Change leader.
+let mapleader=','
+
 " Do not be Vi-compatible.
 set nocompatible
 
@@ -43,7 +46,7 @@ set hlsearch
 " Ignore case sensitivity.
 set ignorecase
 
-" Highlight searches while typing
+" Show searches while typing
 set incsearch
 
 " Number of pixel lines in between characters.
@@ -114,6 +117,16 @@ filetype plugin indent on
 
 " Enable syntax highlighting.
 syntax on
+
+" Switch between windows easier.
+map <C-h> <C-w>h
+map <C-j> <C-w>j
+map <C-k> <C-w>k
+map <C-l> <C-w>l
+
+" Split windows.
+noremap <Leader>h :<C-u>split<CR>
+noremap <Leader>v :<C-u>vsplit<CR>
 
 " Plugin netrw.
 let g:netrw_liststyle = 3
