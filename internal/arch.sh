@@ -56,7 +56,8 @@ pacmanPackages=(
   xfsprogs
 )
 
-yay_packages=(
+yayPackages=(
+  gnome-shell-extension-dash-to-dock
   rcm
   slack-desktop
   zoom
@@ -79,3 +80,16 @@ sudo systemctl enable libvirtd
 sudo systemctl enable NetworkManager
 
 sudo usermod -aG docker,wheel,libvirt $(id -u -n)
+
+sudo mkdir -p /etc/pacman.d/hooks
+sudo tee /etc/pacman.d/hooks/100-systemd-boot.hook > /dev/null << EOF
+[Trigger]
+Type = Package
+Operation = Upgrade
+Target = systemd
+
+[Action]
+Description = Updating systemd-boot
+When = PostTransaction
+Exec = /usr/bin/bootctl update
+EOF
