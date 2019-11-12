@@ -3,6 +3,7 @@
 # Pacman packages.
 pacmanPackages=(
   adobe-source-code-pro-fonts
+  aws-cli
   base
   base-devel
   bash
