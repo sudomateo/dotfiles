@@ -46,8 +46,11 @@ set hlsearch
 " Ignore case sensitivity.
 set ignorecase
 
-" Show searches while typing
+" Show searches while typing.
 set incsearch
+
+" Wrap at characters included in `breakat`.
+set linebreak
 
 " Number of pixel lines in between characters.
 set linespace=0
@@ -107,7 +110,7 @@ set virtualedit=""
 set wildmenu
 
 " Do not wrap lines.
-set nowrap
+set wrap
 
 " Do not make a backup file when writing.
 set nowritebackup
