@@ -71,6 +71,9 @@ if !(command -v yay &> /dev/null); then
 fi
 
 for yayPackage in ${yayPackages[*]}; do
+  if pacman -Q | grep -i ${yayPackage} &> /dev/null; then
+    continue
+  fi
   yay ${yayPackage}
 done
 
