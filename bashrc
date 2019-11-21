@@ -24,7 +24,6 @@ function __set_ps1() {
       break
     else
       export PS1='\[\033[38;5;142m\]\W\[\033[38;5;214m\]\[\033[0m\] $ '
-      break
     fi
   done
 }
