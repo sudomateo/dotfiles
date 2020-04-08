@@ -147,6 +147,9 @@ let g:go_auto_sameids = 1
 " Plugin morhetz/gruvbox.
 let g:gruvbox_italic = 1
 
+" Plugin tpope/vim-commentary
+autocmd FileType sentinel setlocal commentstring=#\ %s
+
 " Load the gruvbox colorscheme if it's there.
 try
 colorscheme gruvbox
