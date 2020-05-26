@@ -1,5 +1,4 @@
-# Git configuration file.
+# GitHub specific user information.
 [user]
-  name = Matthew Sanabria
   email = 24284972+sudomateo@users.noreply.github.com
   useConfigOnly = true

@@ -1,0 +1,7 @@
+# User configuraiton.
+[user]
+  name = Matthew Sanabria
+
+# GitHub specific configuration.
+[includeIf "gitdir:**/github.com/**"]
+	path = ~/.config/git/github

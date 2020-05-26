@@ -3,14 +3,15 @@
 ## Requirements
 
 * [git](https://git-scm.com)
-* [rcm](https://github.com/thoughtbot/rcm)
+* [stow](https://www.gnu.org/software/stow/)
 
 ## Installation 
 
 Clone this repo to `${HOME}/.dotfiles` and run the following.
 
 ```
-${HOME}/.dotfiles/internal/setup.sh
+cd ${HOME}/.dotfiles
+./internal/setup.sh
 ```
 
 ## License
