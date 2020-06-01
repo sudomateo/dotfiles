@@ -20,7 +20,7 @@ Plug 'hashicorp/sentinel.vim'
 Plug 'hashivim/vim-terraform'
 Plug 'morhetz/gruvbox'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'scrooloose/nerdtree'
+Plug 'preservim/nerdtree'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
@@ -44,7 +44,7 @@ set nobackup
 set cmdheight=2
 
 " A comma separated list of screen columns that are highlighted.
-set colorcolumn=81,121
+set colorcolumn=121
 
 " Highlight the screen line of the cursor.
 set cursorline
@@ -52,7 +52,7 @@ set cursorline
 " Do not ring the bell for error messages.
 set noerrorbells
 
-" Use the appropriate number of spaces to insert a tab.
+" Use the appropriate number of spaces to insert a <Tab>.
 set expandtab
 
 " A column with the specified width to indicate open and closed folds.
@@ -76,7 +76,10 @@ set ignorecase
 " While typing a search command, show where the pattern matches.
 set incsearch
 
-" Wrap long lines at a character within `breakat`.
+" Whether the last window will have a status line.
+set laststatus=2
+
+" Wrap long lines at a character within 'breakat'.
 set linebreak
 
 " Number of pixel lines inserted between characters.
@@ -109,38 +112,37 @@ set noshowmatch
 " If in Insert, Replace, or Visual modue put a message on the last line.
 set showmode
 
-" Override the `ignorecase` option if the search pattern contains uppercase
-" characters.
+" Override the `ignorecase` option if the search pattern contains uppercase characters.
 set smartcase
 
-" Number of spaces that a tab counts for while performing editing operations.
+" When on, a <Tab> in front of a line inserts blanks according to 'shiftwidth'.
+set smarttab
+
+" Number of spaces that a <Tab> counts for while performing editing operations.
 set softtabstop=2
 
 " Do not use a swapfile for the buffer.
 set noswapfile
 
-" Number of spaces that tab in the file counts for.
+" Number of spaces that <Tab> in the file counts for.
 set tabstop=2
 
 " Enables 24-bit RGB color in the TUI.
 set termguicolors
 
 " Maximum width of text that is being inserted.
-set textwidth=0
+set textwidth=120
 
-" If nothing is typed in this many milliseconds the swapfile will be written
-" to disk.
+" If nothing is typed in this many milliseconds the swapfile will be written to disk.
 set updatetime=300
 
-" Virtual editing means that the cursor can be positioned where there is no
-" actual character.
+" Virtual editing means that the cursor can be positioned where there is no actual character.
 set virtualedit=""
 
 " Command-line completion operates in an enhanced mode.
 set wildmenu
 
-" When on, lines longer than the width of the window will wrap and displaying
-" continues on the next line.
+" When on, lines longer than the width of the window will wrap and displaying continues on the next line.
 set wrap
 
 " Do not make a backup before overwriting a file.
@@ -156,8 +158,7 @@ syntax on
 " Plugin neoclide/coc.nvim.
 "
 " Use tab for trigger completion with characters ahead and navigate.
-" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
-" other plugin before putting this into your config.
+" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin before putting this into your config.
 inoremap <silent><expr> <TAB>
       \ pumvisible() ? "\<C-n>" :
       \ <SID>check_back_space() ? "\<TAB>" :
@@ -172,8 +173,8 @@ endfunction
 " Use <c-space> to trigger completion.
 inoremap <silent><expr> <c-space> coc#refresh()
 
-" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
-" position. Coc only does snippet and additional edit on confirm.
+" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position. Coc only does snippet and
+" additional edit on confirm.
 " <cr> could be remapped by other vim plugin, try `:verbose imap <CR>`.
 if exists('*complete_info')
   inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
@@ -257,8 +258,7 @@ command! -nargs=? Fold :call     CocAction('fold', <f-args>)
 command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
 
 " Add (Neo)Vim's native statusline support.
-" NOTE: Please see `:h coc-status` for integrations with external plugins that
-" provide custom statusline: lightline.vim, vim-airline.
+" NOTE: Please see `:h coc-status` for integrations with external plugins that provide custom statusline: lightline.vim, vim-airline.
 set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
 " Mappings using CoCList:
@@ -302,8 +302,8 @@ let g:terraform_fmt_on_save=1
 
 
 " Plugin morhetz/gruvbox.
-let g:gruvbox_italic = 1
-let g:gruvbox_contrast_dark = 'medium'
+let g:gruvbox_italic=1
+let g:gruvbox_contrast_dark='medium'
 
 
 " Plugin tpope/vim-commentary.
@@ -311,7 +311,7 @@ autocmd FileType sentinel setlocal commentstring=#\ %s
 
 
 " Plugin vim-airline/vim-airline.
-let g:airline_powerline_fonts = 1
+let g:airline_powerline_fonts=1
 
 
 " Switch between windows easier.
