@@ -65,14 +65,14 @@ elif ( command -v vi > /dev/null 2>&1 ); then
   VISUAL=${EDITOR}
 fi
 
-# Configure PATH.
-pathmunge ${HOME}/bin
-pathmunge ${HOME}/.local/bin
-
 # Configure Go environment variables.
 pathmunge ${HOME}/.local/go/bin
 GOBIN=${HOME}/go/bin
 pathmunge ${GOBIN}
+
+# Configure PATH.
+pathmunge ${HOME}/bin
+pathmunge ${HOME}/.local/bin
 
 # Command aliases.
 alias cp='cp -i'
