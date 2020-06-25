@@ -5,3 +5,5 @@
 # GitHub specific configuration.
 [includeIf "gitdir:**/github.com/**"]
 	path = ~/.config/git/github
+[includeIf "gitdir:~/.dotfiles/**"]
+	path = ~/.config/git/github
