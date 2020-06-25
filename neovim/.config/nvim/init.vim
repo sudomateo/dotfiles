@@ -44,7 +44,7 @@ set nobackup
 set cmdheight=2
 
 " A comma separated list of screen columns that are highlighted.
-set colorcolumn=121
+set colorcolumn=81,121
 
 " Highlight the screen line of the cursor.
 set cursorline
@@ -292,6 +292,7 @@ let g:go_gopls_options=['-remote=auto']
 let g:go_highlight_extra_types=1
 let g:go_info_mode='gopls'
 let g:go_referrers_mode='gopls'
+let g:go_rename_command="gopls"
 let g:go_term_enabled=1
 let g:go_term_height=10
 let g:go_term_mode="split"
