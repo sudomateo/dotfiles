@@ -2,10 +2,37 @@
   "languageserver": {
     "golang": {
       "command": "gopls",
-      "args": ["-remote=auto"],
-      "rootPatterns": ["go.mod", ".vim/", ".git/", ".hg/"],
-      "filetypes": ["go"]
+      "args": [
+        "-remote=auto"
+      ],
+      "filetypes": [
+        "go"
+      ],
+      "initializationOptions": {
+        "usePlaceholders": true
+      },
+      "rootPatterns": [
+        "go.mod",
+        ".vim/",
+        ".git/",
+        ".hg/"
+      ],
+      "disableWorkspaceFolders": true
+    },
+    "terraform": {
+      "command": "terraform-ls",
+      "args": [
+        "serve"
+      ],
+      "filetypes": [
+        "terraform",
+        "tf"
+      ],
+      "initializationOptions": {},
+      "settings": {}
     }
   },
-  "coc.preferences.formatOnSaveFiletypes": ["go"]
+  "coc.preferences.formatOnSaveFiletypes": [
+    "go"
+  ]
 }
