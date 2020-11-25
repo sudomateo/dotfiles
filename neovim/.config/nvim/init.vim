@@ -15,9 +15,12 @@ endif
 
 " Plugins installed by vim-plug.
 call plug#begin(stdpath('data'))
+Plug 'airblade/vim-gitgutter'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'hashicorp/sentinel.vim'
 Plug 'hashivim/vim-terraform'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 Plug 'morhetz/gruvbox'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'preservim/nerdtree'
@@ -56,7 +59,7 @@ set noerrorbells
 set expandtab
 
 " A column with the specified width to indicate open and closed folds.
-set foldcolumn=1
+" set foldcolumn=1
 
 " Allow folds to be open or closed.
 set foldenable
@@ -123,6 +126,8 @@ set softtabstop=2
 
 " Do not use a swapfile for the buffer.
 set noswapfile
+
+" set t_BE=
 
 " Number of spaces that <Tab> in the file counts for.
 set tabstop=2

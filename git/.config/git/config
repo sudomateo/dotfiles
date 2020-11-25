@@ -1,9 +1,15 @@
 # User configuraiton.
 [user]
-  name = Matthew Sanabria
+	name = Matthew Sanabria
+
+# Git pull configuration.
+[pull]
+	rebase = false
 
 # GitHub specific configuration.
 [includeIf "gitdir:**/github.com/**"]
 	path = ~/.config/git/github
 [includeIf "gitdir:~/.dotfiles/**"]
 	path = ~/.config/git/github
+[url "ssh://git@github.com/"]
+	insteadOf = https://github.com/

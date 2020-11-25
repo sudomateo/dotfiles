@@ -21,6 +21,7 @@ function pathmunge() {
 # Function prompt configures the PS1 prompt.
 function prompt() {
   local git_prompt_files=(
+    "/usr/local/etc/bash_completion.d/git-prompt.sh"
     "/usr/share/doc/git/contrib/completion/git-prompt.sh"
     "/usr/share/git-core/contrib/completion/git-prompt.sh"
     "/usr/share/git/completion/git-prompt.sh"
@@ -32,15 +33,16 @@ function prompt() {
     fi
     source "${git_prompt_file}"
     export GIT_PS1_SHOWDIRTYSTATE=1
-    PS1='\[\033[38;5;142m\]\W\[\033[38;5;214m\]$(__git_ps1 " (%s)")\[\033[0m\] $ '
+    PS1='\[\033[38;5;10m\]\W\[\033[38;5;11m\]$(__git_ps1 " (%s)")\[\033[0m\]\n\[\e[0m\]> '
     return
   done
-  PS1='\[\033[38;5;142m\]\W\[\033[38;5;214m\]\[\033[0m\] $ '
+  PS1='\[\033[38;5;10m\]\W\[\033[38;5;11m\]\[\033[0m\]\n\[\e[0m\]> '
 }
 
 # Function completion configures command completion.
 function completion () {
   local completion_files=(
+    "/usr/local/etc/bash_completion.d/git-completion.bash"
     "/usr/share/doc/git/contrib/completion/git-completion.bash"
   )
   for completion_file in ${completion_files[*]}; do
@@ -93,3 +95,7 @@ export EDITOR GOBIN PATH PS1 VISUAL
 
 # Unset all functions since we're done using them.
 unset -f completion pathmunge prompt
+
+# macOS
+# export CLICOLOR=1
+# export LSCOLORS=ExGxFxdxCxDxDxxbadacec
