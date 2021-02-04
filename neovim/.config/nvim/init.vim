@@ -325,11 +325,18 @@ map <C-h> <C-w>h
 map <C-j> <C-w>j
 map <C-k> <C-w>k
 map <C-l> <C-w>l
+map sh <C-w>h
+map sj <C-w>j
+map sk <C-w>k
+map sl <C-w>l
 
 " Split windows.
 noremap <Leader>h :<C-u>split<CR>
 noremap <Leader>v :<C-u>vsplit<CR>
 
+" Switch tab
+nmap <S-Tab> :tabprev<Return>
+nmap <Tab> :tabnext<Return>
 
 " Load gruvbox colorscheme.
 try

@@ -26,6 +26,7 @@ function prompt() {
     "/usr/share/git-core/contrib/completion/git-prompt.sh"
     "/usr/share/git/completion/git-prompt.sh"
     "/usr/share/git/git-prompt.sh"
+    "/etc/bash_completion.d/git-prompt"
   )
   for git_prompt_file in ${git_prompt_files[*]}; do
     if [ ! -f "${git_prompt_file}" ]; then
@@ -33,10 +34,10 @@ function prompt() {
     fi
     source "${git_prompt_file}"
     export GIT_PS1_SHOWDIRTYSTATE=1
-    PS1='\[\033[38;5;10m\]\W\[\033[38;5;11m\]$(__git_ps1 " (%s)")\[\033[0m\]\n\[\e[0m\]> '
+    PS1='\[\e[38;5;10m\]\W\[\e[38;5;11m\]$(__git_ps1 " (%s)")\[\e[0m\]\n\[\e[0m\]> '
     return
   done
-  PS1='\[\033[38;5;10m\]\W\[\033[38;5;11m\]\[\033[0m\]\n\[\e[0m\]> '
+  PS1='\[\033[38;5;10m\]\w\[\033[38;5;11m\]\[\033[0m\]\n\[\e[0m\]> '
 }
 
 # Function completion configures command completion.
