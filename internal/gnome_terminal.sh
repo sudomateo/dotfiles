@@ -1,23 +1,48 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
-# Generate UUIDs like so.
+# Profile UUIDs can be generated using the following command:
 # uuidgen --sha1 --namespace @oid --name NAME
 
 dconf load /org/gnome/terminal/legacy/profiles:/ << EOF
 [/]
-default='86bc7c1e-75f2-59cd-bf45-be1f2cf6464e'
-list=['86bc7c1e-75f2-59cd-bf45-be1f2cf6464e']
+default='40ca0a8f-ca88-40f7-aab2-12694233beb7'
+list=['40ca0a8f-ca88-40f7-aab2-12694233beb7', 'c7395bf4-3304-4032-ad42-ba5b459762f8']
 
-[:86bc7c1e-75f2-59cd-bf45-be1f2cf6464e]
+[:40ca0a8f-ca88-40f7-aab2-12694233beb7]
 audible-bell=false
-background-color='#282828282828'
-bold-color='#000000000000'
-bold-color-same-as-fg=true
+background-color='rgb(40,40,40)'
+background-transparency-percent=0
+bold-color='rgb(235,219,178)'
+bold-color-same-as-fg=false
 bold-is-bright=true
-foreground-color='#ebebdbdbb2b2'
-palette=['#282828282828', '#cccc24241d1d', '#989897971a1a', '#d7d799992121', '#454585858888', '#b1b162628686', '#68689d9d6a6a', '#bdbdaeae9393', '#7c7c6f6f6464', '#fbfb49493434', '#b8b8bbbb2626', '#fafabdbd2f2f', '#8383a5a59898', '#d3d386869b9b', '#8e8ec0c07c7c', '#ebebdbdbb2b2']
-scrollback-lines=10000
-use-system-font=true
+cursor-background-color='rgb(235,219,178)'
+cursor-colors-set=true
+cursor-foreground-color='rgb(40,40,40)'
+foreground-color='rgb(235,219,178)'
+highlight-background-color='rgb(235,219,178)'
+highlight-colors-set=true
+highlight-foreground-color='rgb(40,40,40)'
+palette=['rgb(40,40,40)', 'rgb(204,36,29)', 'rgb(152,151,26)', 'rgb(215,153,33)', 'rgb(69,133,136)', 'rgb(177,98,134)', 'rgb(104,157,106)', 'rgb(168,153,132)', 'rgb(146,131,116)', 'rgb(251,73,52)', 'rgb(184,187,38)', 'rgb(250,189,47)', 'rgb(131,165,152)', 'rgb(211,134,155)', 'rgb(142,192,124)', 'rgb(235,219,178)']
 use-theme-colors=false
-visible-name='Gruvbox Dark'
+use-transparent-background=false
+visible-name='Gruvbox (Dark)'
+
+[:c7395bf4-3304-4032-ad42-ba5b459762f8]
+audible-bell=false
+background-color='rgb(251,241,199)'
+background-transparency-percent=0
+bold-color='rgb(60,56,54)'
+bold-color-same-as-fg=false
+bold-is-bright=true
+cursor-background-color='rgb(60,56,54)'
+cursor-colors-set=true
+cursor-foreground-color='rgb(251,241,199)'
+foreground-color='rgb(60,56,54)'
+highlight-background-color='rgb(60,56,54)'
+highlight-colors-set=true
+highlight-foreground-color='rgb(251,241,199)'
+palette=['rgb(251,241,199)', 'rgb(204,36,29)', 'rgb(152,151,26)', 'rgb(215,153,33)', 'rgb(69,133,136)', 'rgb(177,98,134)', 'rgb(104,157,106)', 'rgb(124,111,100)', 'rgb(146,131,116)', 'rgb(157,0,6)', 'rgb(121,116,14)', 'rgb(181,118,20)', 'rgb(7,102,120)', 'rgb(143,63,113)', 'rgb(66,123,88)', 'rgb(60,56,54)']
+use-theme-colors=false
+use-transparent-background=false
+visible-name='Gruvbox (Light)'
 EOF
