@@ -1,6 +1,6 @@
-# Source ~/.bashrc.
-if [[ -f ${HOME}/.bashrc ]]; then
-  source ${HOME}/.bashrc
+# Source user aliases and functions.
+if [ -f ~/.bashrc ]; then
+	. ~/.bashrc
 fi
 
 # User specific environment and startup programs
