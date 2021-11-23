@@ -11,5 +11,7 @@
 	path = ~/.config/git/github
 [includeIf "gitdir:~/.dotfiles/**"]
 	path = ~/.config/git/github
+
+# Use SSH instead of HTTPS.
 [url "ssh://git@github.com/"]
 	insteadOf = https://github.com/
