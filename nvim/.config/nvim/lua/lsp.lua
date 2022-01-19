@@ -29,11 +29,16 @@ local on_attach = function(client, bufnr)
 	buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
 end
 
+-- Add additional capabilities supported by nvim-cmp
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+
 nvim_lsp.gopls.setup {
 	cmd = { "gopls", "serve" },
 	on_attach = on_attach,
 	filetypes = { "go", "gomod" },
 	root_dir = nvim_lsp.util.root_pattern("go.mod", ".git"),
+	capabilities = capabilities,
 }
 
 nvim_lsp.terraformls.setup {
@@ -41,6 +46,7 @@ nvim_lsp.terraformls.setup {
 	on_attach = on_attach,
 	filetypes = { "terraform" },
 	root_dir = nvim_lsp.util.root_pattern(".terraform", ".git"),
+	capabilities = capabilities,
 }
 
 require('nvim-treesitter.configs').setup {
