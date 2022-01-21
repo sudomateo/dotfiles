@@ -15,5 +15,3 @@
 # Use SSH instead of HTTPS.
 [url "ssh://git@github.com/"]
 	insteadOf = https://github.com/
-[push]
-	default = matching
