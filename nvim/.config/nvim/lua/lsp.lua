@@ -32,6 +32,8 @@ end
 -- Add additional capabilities supported by nvim-cmp
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+
 
 nvim_lsp.gopls.setup {
 	cmd = { "gopls", "serve" },
@@ -53,4 +55,12 @@ require('nvim-treesitter.configs').setup {
 	highlight = {
 		enable = true,
 	},
+}
+
+require('lspconfig').html.setup {
+  capabilities = capabilities,
+}
+
+require('lspconfig').cssls.setup {
+  capabilities = capabilities,
 }
