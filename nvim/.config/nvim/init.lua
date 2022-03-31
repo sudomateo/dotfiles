@@ -6,7 +6,7 @@ vim.cmd([[
 	try
 		colorscheme gruvbox
 	catch
-		colorschem default
+		colorscheme default
 	endtry
 ]])
 
@@ -23,10 +23,8 @@ vim.cmd([[
 	syntax on
 ]])
 
-require('nvim_comment').setup()
-
 local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
-parser_config.hcl.used_by = "terraform"
+parser_config.hcl.filetype_to_parsername = "terraform"
 
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = 'menuone,noselect'
