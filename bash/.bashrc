@@ -19,7 +19,7 @@ function pathmunge() {
 	esac
 }
 
-# Configure Go environment variables.
+# Go configuration.
 pathmunge ${HOME}/.local/go/bin
 export GOBIN=${HOME}/go/bin
 pathmunge ${GOBIN}
