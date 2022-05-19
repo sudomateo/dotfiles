@@ -28,6 +28,9 @@ pathmunge ${GOBIN}
 pathmunge ${HOME}/bin
 pathmunge ${HOME}/.local/bin
 
+# Rust configuration.
+pathmunge ${HOME}/.cargo/bin
+
 # Uncomment the following line if you don't like systemctl's auto-paging feature:
 # export SYSTEMD_PAGER=
 
