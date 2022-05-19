@@ -1,6 +1,9 @@
-vim.cmd([[
-	silent! autocmd! filetypedetect BufRead,BufNewFile *.tf
-	autocmd BufRead,BufNewFile *.tf,*.tfvars set filetype=terraform
-	autocmd BufRead,BufNewFile .terraformrc,terraform.rc set filetype=hcl
-	autocmd BufRead,BufNewFile *.tfstate,*.tfstate.backup set filetype=json
-]])
+vim.api.nvim_create_autocmd({
+	"BufRead", "BufNewFile",
+}, {
+	group = filetypedetect_id,
+	pattern = {"*.tf", "*.tfvars"},
+	callback = function()
+		vim.bo.filetype = "terraform"
+	end,
+})
