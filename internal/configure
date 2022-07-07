@@ -1,0 +1,74 @@
+#!/bin/bash
+
+# RPM Fusion
+sudo dnf install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+
+# Multimedia codecs
+sudo dnf install gstreamer1-plugins-{bad-\*,good-\*,base} gstreamer1-plugin-openh264 gstreamer1-libav --exclude=gstreamer1-plugins-bad-free-devel
+sudo dnf install lame\* --exclude=lame-devel
+sudo dnf group upgrade --with-optional Multimedia
+
+sudo rpm --import https://downloads.1password.com/linux/keys/1password.asc
+
+sudo sh -c 'echo -e "[1password]\nname=1Password Stable Channel\nbaseurl=https://downloads.1password.com/linux/rpm/stable/\$basearch\nenabled=1\ngpgcheck=1\nrepo_gpgcheck=1\ngpgkey=\"https://downloads.1password.com/linux/keys/1password.asc\"" > /etc/yum.repos.d/1password.repo'
+
+packages=(
+	1password
+	discord
+	gcc-c++
+	kernel-devel
+	kmod-v4l2loopback
+	neovim
+	obs-studio
+	ripgrep
+	stow
+	tmux
+)
+
+sudo dnf install ${packages[@]}
+sudo dnf module install nodejs:16
+
+sudo hostnamectl set-hostname "sudomateo-ws"
+
+mkdir -p ~/.local/bin
+
+if ( ! command -v go > /dev/null 2>&1 ); then
+	curl -L -o /tmp/go.zip https://go.dev/dl/go1.18.3.linux-amd64.tar.gz
+	tar -zxvf /tmp/go.zip -C ~/.local
+fi
+
+go install golang.org/x/tools/gopls@latest
+
+
+if ( ! command -v terraform-ls > /dev/null 2>&1 ); then
+	curl -L -o /tmp/terraform-ls.zip https://github.com/hashicorp/terraform-ls/releases/download/v0.28.1/terraform-ls_0.28.1_linux_amd64.zip
+	unzip /tmp/terraform-ls.zip terraform-ls -d ~/.local/bin
+fi
+
+if ( ! command -v vscode-html-language-server > /dev/null 2>&1 ); then
+	npm i -g vscode-langservers-extracted
+fi
+
+if ( ! command -v tsserver > /dev/null 2>&1 ); then
+	npm install -g typescript typescript-language-server
+fi
+
+if ( ! command -v rust-analyzer > /dev/null 2>&1 ); then
+	curl -L -o /tmp/rust-analyzer.gz https://github.com/rust-analyzer/rust-analyzer/releases/latest/download/rust-analyzer-x86_64-unknown-linux-gnu.gz
+	gzip --decompress --stdout /tmp/rust-analyzer.gz > ~/.local/bin/rust-analyzer
+	chmod +x ~/.local/bin/rust-analyzer
+fi
+
+
+if ( ! command -v lua-language-server > /dev/null 2>&1 ); then
+	curl -L -o /tmp/lua-language-server.tar.gz https://github.com/sumneko/lua-language-server/releases/download/3.4.0/lua-language-server-3.4.0-linux-x64.tar.gz
+	mkdir -p ~/.local/lib/lua-language-server
+	tar -zxvf /tmp/lua-language-server.tar.gz -C ~/.local/lib/lua-language-server
+	cat <<EOF > ~/.local/bin/lua-language-server
+#!/bin/bash
+exec "~/.local/lib/lua-language-server/bin/lua-language-server" "\${@}"
+EOF
+	chmod +x ~/.local/bin/lua-language-server
+fi
+
+
