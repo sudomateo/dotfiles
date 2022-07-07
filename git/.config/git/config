@@ -1,6 +1,7 @@
-# User configuraiton.
+# User configuration.
 [user]
 	name = Matthew Sanabria
+	useConfigOnly = true
 
 # Git pull configuration.
 [pull]
@@ -13,5 +14,5 @@
 	path = ~/.config/git/github
 
 # Use SSH instead of HTTPS.
-[url "ssh://git@github.com/"]
+[url "git@github.com:"]
 	insteadOf = https://github.com/

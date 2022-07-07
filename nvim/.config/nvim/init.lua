@@ -10,9 +10,9 @@ vim.cmd([[
   endtry
 ]])
 
-vim.cmd([[
-  noremap <silent><leader>/ :nohlsearch<cr>
-]])
+vim.keymap.set("", "<C-k>", require('telescope.builtin').find_files)
+vim.keymap.set("", "<C-f>", require('telescope.builtin').live_grep)
+vim.keymap.set("n", "<leader>/", ":nohlsearch<CR>")
 
 vim.g.gruvbox_italic = 1
 vim.g.gruvbox_contrast_dark = 'medium'
@@ -46,6 +46,7 @@ cmp.setup {
     { name = 'luasnip' },
   }, {
     { name = 'buffer' },
+    { name = 'path' },
   })
 }
 
