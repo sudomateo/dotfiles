@@ -10,7 +10,7 @@ vim.cmd([[
   endtry
 ]])
 
-vim.keymap.set("", "<C-k>", require('telescope.builtin').find_files)
+vim.keymap.set("", "<C-p>", require('telescope.builtin').find_files)
 vim.keymap.set("", "<C-f>", require('telescope.builtin').live_grep)
 vim.keymap.set("n", "<leader>/", ":nohlsearch<CR>")
 

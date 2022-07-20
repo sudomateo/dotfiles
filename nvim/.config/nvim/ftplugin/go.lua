@@ -4,14 +4,7 @@ vim.opt_local.softtabstop= 2
 vim.opt_local.tabstop = 2
 
 vim.api.nvim_create_autocmd("BufWritePre", {
-  pattern = { "*.go" },
-  callback = function()
-	  vim.lsp.buf.formatting_sync(nil, 3000)
-  end,
-})
-
-vim.api.nvim_create_autocmd("BufWritePre", {
-	pattern = { "*.go" },
+	pattern = { "<buffer>" },
 	callback = function()
 		local params = vim.lsp.util.make_range_params(nil, vim.lsp.util._get_offset_encoding())
 		params.context = {only = {"source.organizeImports"}}

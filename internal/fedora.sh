@@ -3,7 +3,6 @@
 packages=(
   dconf
   gcc-c++
-  gnome-tweak-tool
   neovim
   ripgrep
   stow
