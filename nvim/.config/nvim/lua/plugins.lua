@@ -1,7 +1,8 @@
 -- Install Packer plugin.
 local packerInstallPath = vim.fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
 if vim.fn.empty(vim.fn.glob(packerInstallPath)) ~= 0 then
-	packerBootstrapped = vim.fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', packerInstallPath})
+	packerBootstrapped = vim.fn.system({ 'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim',
+		packerInstallPath })
 end
 
 -- Compile Packer plugin when this plugins.lua file is updated.
@@ -45,7 +46,7 @@ return require('packer').startup(
 		-- Telescope.
 		use {
 			'nvim-telescope/telescope.nvim',
-			requires = { {'nvim-lua/plenary.nvim'} }
+			requires = { { 'nvim-lua/plenary.nvim' } }
 		}
 
 		-- Telescope extensions.
