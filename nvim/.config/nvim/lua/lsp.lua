@@ -49,7 +49,7 @@ require('lspconfig').gopls.setup {
 require('lspconfig').terraformls.setup {
 	cmd = { "terraform-ls", "serve" },
 	on_attach = on_attach,
-	-- filetypes = { "terraform", "terraform-vars" },
+	filetypes = { "terraform", "terraform-vars" },
 	root_dir = require('lspconfig').util.root_pattern(".terraform", ".git"),
 	capabilities = capabilities,
 }
