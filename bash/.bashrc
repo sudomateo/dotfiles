@@ -19,18 +19,23 @@ function pathmunge() {
 	esac
 }
 
+# Configure system PATH.
+pathmunge /bin after
+pathmunge /sbin after
+
 # Configure user specific PATH.
 pathmunge ${HOME}/bin
 pathmunge ${HOME}/.local/bin
 
 # Go configuration.
-export GOPATH=${HOME}/.local/lib/go
 pathmunge ${HOME}/.local/go/bin
-pathmunge ${GOPATH}/bin
+export GOPATH=${HOME}/.local/lib/go
+export GOBIN=${HOME}/.local/lib/go/bin
+pathmunge ${GOBIN}
 
 # Rust configuration.
-export RUSTUP_HOME=${HOME}/.local/lib/rust/rustup
-export CARGO_HOME=${HOME}/.local/lib/rust/cargo
+export RUSTUP_HOME=${HOME}/.local/lib/rustup
+export CARGO_HOME=${HOME}/.local/lib/cargo
 pathmunge ${CARGO_HOME}/bin
 
 # Node.js configuration.

@@ -34,6 +34,8 @@ return require('packer').startup(
 			},
 		}
 
+		use 'nvim-treesitter/nvim-treesitter-context'
+
 		-- Language Server Protocol (LSP) and autocompletion.
 		use 'neovim/nvim-lspconfig'
 		use 'hrsh7th/cmp-nvim-lsp'
@@ -56,7 +58,7 @@ return require('packer').startup(
 		}
 
 		-- Icons for Telescope.
-		use 'kyazdani42/nvim-web-devicons'
+		-- use 'kyazdani42/nvim-web-devicons'
 
 		-- Execute PackerSync if the Packer plugin was just installed.
 		if packerBootstrapped then

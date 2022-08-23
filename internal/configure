@@ -14,7 +14,6 @@ sudo sh -c 'echo -e "[1password]\nname=1Password Stable Channel\nbaseurl=https:/
 
 packages=(
 	1password
-	discord
 	gcc-c++
 	kernel-devel
 	kmod-v4l2loopback
@@ -33,7 +32,7 @@ sudo hostnamectl set-hostname "sudomateo-ws"
 mkdir -p ~/.local/bin
 
 if ( ! command -v go > /dev/null 2>&1 ); then
-	curl -L -o /tmp/go.zip https://go.dev/dl/go1.18.3.linux-amd64.tar.gz
+	curl -L -o /tmp/go.zip https://go.dev/dl/go1.18.4.linux-amd64.tar.gz
 	tar -zxvf /tmp/go.zip -C ~/.local
 fi
 
@@ -70,5 +69,3 @@ exec "~/.local/lib/lua-language-server/bin/lua-language-server" "\${@}"
 EOF
 	chmod +x ~/.local/bin/lua-language-server
 fi
-
-

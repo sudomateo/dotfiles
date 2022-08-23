@@ -26,12 +26,12 @@ local on_attach = function(client, bufnr)
 	vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
 	vim.keymap.set('n', '<space>f', vim.lsp.buf.formatting, opts)
 
-	vim.api.nvim_create_autocmd("BufWritePre", {
-		buffer = bufnr,
-		callback = function()
-			vim.lsp.buf.formatting_sync(nil, 3000)
-		end,
-	})
+	-- vim.api.nvim_create_autocmd("BufWritePre", {
+	-- 	buffer = bufnr,
+	-- 	callback = function()
+	-- 		vim.lsp.buf.formatting_sync(nil, 3000)
+	-- 	end,
+	-- })
 end
 
 -- Add additional capabilities supported by nvim-cmp
