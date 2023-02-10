@@ -1,0 +1,278 @@
+diff --git a/bash/.bashrc b/bash/.bashrc
+index 9f81a69..bcc95bb 100644
+--- a/bash/.bashrc
++++ b/bash/.bashrc
+@@ -27,10 +27,11 @@ pathmunge ${HOME}/.local/bin
+ export GOPATH=${HOME}/.local/lib/go
+ pathmunge ${HOME}/.local/go/bin
+ pathmunge ${GOPATH}/bin
++pathmunge ${HOME}/.local/tinygo/bin
+ 
+ # Rust configuration.
+-export RUSTUP_HOME=${HOME}/.local/lib/rust/rustup
+-export CARGO_HOME=${HOME}/.local/lib/rust/cargo
++export RUSTUP_HOME=${HOME}/.local/lib/rustup
++export CARGO_HOME=${HOME}/.local/lib/cargo
+ pathmunge ${CARGO_HOME}/bin
+ 
+ # Node.js configuration.
+diff --git a/internal/configure b/internal/configure
+index 15ee384..8b34dec 100755
+--- a/internal/configure
++++ b/internal/configure
+@@ -1,5 +1,6 @@
+ #!/bin/bash
+ 
++
+ # RPM Fusion
+ sudo dnf install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+ 
+@@ -14,12 +15,9 @@ sudo sh -c 'echo -e "[1password]\nname=1Password Stable Channel\nbaseurl=https:/
+ 
+ packages=(
+ 	1password
+-	discord
+ 	gcc-c++
+-	kernel-devel
+-	kmod-v4l2loopback
+ 	neovim
+-	obs-studio
++	podman-compose
+ 	ripgrep
+ 	stow
+ 	tmux
+@@ -28,7 +26,7 @@ packages=(
+ sudo dnf install ${packages[@]}
+ sudo dnf module install nodejs:16
+ 
+-sudo hostnamectl set-hostname "sudomateo-ws"
++sudo hostnamectl set-hostname "vm-fedora"
+ 
+ mkdir -p ~/.local/bin
+ 
+diff --git a/nvim/.config/nvim/ftplugin/rust.lua b/nvim/.config/nvim/ftplugin/rust.lua
+index a45a4c8..fec465c 100644
+--- a/nvim/.config/nvim/ftplugin/rust.lua
++++ b/nvim/.config/nvim/ftplugin/rust.lua
+@@ -2,3 +2,22 @@ vim.opt_local.expandtab = true
+ vim.opt_local.shiftwidth = 4
+ vim.opt_local.softtabstop= 4
+ vim.opt_local.tabstop = 4
++
++-- vim.api.nvim_create_autocmd("BufWritePre", {
++-- 	pattern = { "<buffer>" },
++-- 	callback = function()
++-- 		local params = vim.lsp.util.make_range_params(nil, vim.lsp.util._get_offset_encoding())
++-- 		-- params.context = { only = { "source.organizeImports" } }
++
++-- 		local result = vim.lsp.buf_request_sync(0, "textDocument/codeAction", params, 3000)
++-- 		for _, res in pairs(result or {}) do
++-- 			for _, r in pairs(res.result or {}) do
++-- 				if r.edit then
++-- 					vim.lsp.util.apply_workspace_edit(r.edit, vim.lsp.util._get_offset_encoding())
++-- 				else
++-- 					vim.lsp.buf.execute_command(r.command)
++-- 				end
++-- 			end
++-- 		end
++-- 	end,
++-- })
+diff --git a/nvim/.config/nvim/init.lua b/nvim/.config/nvim/init.lua
+index 4438289..404fb8c 100644
+--- a/nvim/.config/nvim/init.lua
++++ b/nvim/.config/nvim/init.lua
+@@ -14,6 +14,9 @@ vim.keymap.set("", "<C-p>", require('telescope.builtin').find_files)
+ vim.keymap.set("", "<C-f>", require('telescope.builtin').live_grep)
+ vim.keymap.set("n", "<leader>/", ":nohlsearch<CR>")
+ 
++vim.keymap.set("v", "K", ":move '<-2<CR>gv=gv")
++vim.keymap.set("v", "J", ":move '>+1<CR>gv=gv")
++
+ vim.g.gruvbox_italic = 1
+ vim.g.gruvbox_contrast_dark = 'medium'
+ vim.g.gruvbox_contrast_light = 'light'
+@@ -27,10 +30,11 @@ local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
+ parser_config.hcl.filetype_to_parsername = "terraform"
+ 
+ local cmp = require('cmp')
+-cmp.setup {
++cmp.setup({
+ 	snippet = {
+ 		expand = function(args)
+-			require('luasnip').lsp_expand(args.body)
++			vim.fn["vsnip#anonymous"](args.body)
++			-- require('luasnip').lsp_expand(args.body)
+ 		end,
+ 	},
+ 	window = {},
+@@ -48,6 +52,7 @@ cmp.setup {
+ 		{ name = 'buffer' },
+ 		{ name = 'path' },
+ 	})
+-}
++})
+ 
+ require('telescope').load_extension('fzf')
++require('telescope').load_extension('file_browser')
+diff --git a/nvim/.config/nvim/lua/lsp.lua b/nvim/.config/nvim/lua/lsp.lua
+index 6818996..e68d831 100644
+--- a/nvim/.config/nvim/lua/lsp.lua
++++ b/nvim/.config/nvim/lua/lsp.lua
+@@ -2,40 +2,38 @@ local opts = {
+ 	noremap = true,
+ 	silent = true,
+ }
+-vim.api.nvim_set_keymap('n', '<space>e', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
+-vim.api.nvim_set_keymap('n', '<space>q', '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
+-vim.api.nvim_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
+-vim.api.nvim_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
+ 
+-opts["buffer"] = 0
++vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts)
++vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
++vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
++vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
+ 
+ local on_attach = function(client, bufnr)
+ 	vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+ 
+-	vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
+-	vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
+-	vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
+-	vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
+-	vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, opts)
+-	vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, opts)
+-	vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, opts)
+-	vim.keymap.set('n', '<space>wl', vim.lsp.buf.list_workspace_folders, opts)
+-	vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, opts)
+-	vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, opts)
+-	vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, opts)
+-	vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
+-	vim.keymap.set('n', '<space>f', vim.lsp.buf.formatting, opts)
++	local bufopts = { noremap = true, silent = true, buffer = bufnr }
+ 
+-	vim.api.nvim_create_autocmd("BufWritePre", {
+-		buffer = bufnr,
+-		callback = function()
+-			vim.lsp.buf.formatting_sync(nil, 3000)
+-		end,
+-	})
++	vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
++	vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
++	vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
++	vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
++	vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
++	vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, bufopts)
++	vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
++	vim.keymap.set('n', '<space>wl', function()
++		print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
++	end, bufopts)
++	vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, bufopts)
++	vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
++	vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
++	vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
++	vim.keymap.set('n', '<space>f', function()
++		vim.lsp.buf.format({ async = true })
++	end, bufopts)
+ end
+ 
+ -- Add additional capabilities supported by nvim-cmp
+-local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
++local capabilities = require('cmp_nvim_lsp').default_capabilities()
+ capabilities.textDocument.completion.completionItem.snippetSupport = true
+ 
+ require('lspconfig').gopls.setup {
+@@ -78,6 +76,27 @@ require('lspconfig').tsserver.setup {
+ require('lspconfig').rust_analyzer.setup {
+ 	on_attach = on_attach,
+ 	capabilities = capabilities,
++	settings = {
++		["rust-analyzer"] = {
++			checkOnSave = {
++				command = "clippy",
++			},
++			imports = {
++				granularity = {
++					group = "module",
++				},
++				prefix = "self",
++			},
++			cargo = {
++				buildScripts = {
++					enable = true,
++				},
++			},
++			procMacro = {
++				enable = true
++			},
++		}
++	}
+ }
+ 
+ local runtime_path = vim.split(package.path, ';')
+diff --git a/nvim/.config/nvim/lua/options.lua b/nvim/.config/nvim/lua/options.lua
+index 81b9c44..cfb1e23 100644
+--- a/nvim/.config/nvim/lua/options.lua
++++ b/nvim/.config/nvim/lua/options.lua
+@@ -16,7 +16,7 @@ vim.opt.directory = vim.fn.stdpath("data") .. "/swap"
+ vim.opt.equalalways = false
+ vim.opt.errorbells = false
+ vim.opt.expandtab = false
+-vim.opt.foldenable = true
++vim.opt.foldenable = false
+ vim.opt.foldlevel = 0
+ vim.opt.foldmethod = "marker"
+ vim.opt.formatoptions = vim.opt.formatoptions + "c"
+@@ -40,7 +40,7 @@ vim.opt.linebreak = true
+ vim.opt.linespace = 0
+ vim.opt.matchtime = 3
+ vim.opt.modelines = 1
+--- vim.opt.mouse = "n"
++vim.opt.mouse = ""
+ vim.opt.number = true
+ vim.opt.relativenumber = true
+ vim.opt.ruler = true
+@@ -61,7 +61,7 @@ vim.opt.splitright = true
+ vim.opt.swapfile = false
+ vim.opt.tabstop = 4
+ vim.opt.termguicolors = true
+-vim.opt.title = true
++vim.opt.title = false
+ vim.opt.undodir = vim.fn.stdpath("data") .. "/undo"
+ vim.opt.undofile = true
+ vim.opt.updatetime = 300
+diff --git a/nvim/.config/nvim/lua/plugins.lua b/nvim/.config/nvim/lua/plugins.lua
+index b61b0b3..7507dd1 100644
+--- a/nvim/.config/nvim/lua/plugins.lua
++++ b/nvim/.config/nvim/lua/plugins.lua
+@@ -34,14 +34,19 @@ return require('packer').startup(
+ 			},
+ 		}
+ 
++		use 'nvim-treesitter/nvim-treesitter-context'
++
+ 		-- Language Server Protocol (LSP) and autocompletion.
+ 		use 'neovim/nvim-lspconfig'
+ 		use 'hrsh7th/cmp-nvim-lsp'
+ 		use 'hrsh7th/cmp-buffer'
+ 		use 'hrsh7th/cmp-path'
++		use 'hrsh7th/cmp-cmdline'
+ 		use 'hrsh7th/nvim-cmp'
+-		use 'L3MON4D3/LuaSnip'
+-		use 'saadparwaiz1/cmp_luasnip'
++		-- use 'L3MON4D3/LuaSnip'
++		-- use 'saadparwaiz1/cmp_luasnip'
++		use 'hrsh7th/cmp-vsnip'
++		use 'hrsh7th/vim-vsnip'
+ 
+ 		-- Telescope.
+ 		use {
+@@ -55,6 +60,8 @@ return require('packer').startup(
+ 			run = 'make'
+ 		}
+ 
++		use { 'nvim-telescope/telescope-file-browser.nvim' }
++
+ 		-- Icons for Telescope.
+ 		use 'kyazdani42/nvim-web-devicons'
+ 
