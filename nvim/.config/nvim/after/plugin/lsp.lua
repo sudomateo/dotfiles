@@ -70,7 +70,7 @@ require("lspconfig")["rust_analyzer"].setup {
     }
 }
 
-require("lspconfig")["sumneko_lua"].setup {
+require("lspconfig")["lua_ls"].setup {
     settings = {
         Lua = {
             runtime = {
@@ -88,6 +88,11 @@ require("lspconfig")["sumneko_lua"].setup {
             },
         },
     },
+}
+
+require("lspconfig")["terraformls"].setup {
+    on_attach = on_attach,
+    capabilities = capabilities,
 }
 
 require("lspconfig")["tsserver"].setup {

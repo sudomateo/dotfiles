@@ -1,5 +1,7 @@
 require("gruvbox").setup({
-    italic = false,
+    italic = {
+        strings = false,
+    },
 })
 
 vim.cmd.colorscheme("gruvbox")

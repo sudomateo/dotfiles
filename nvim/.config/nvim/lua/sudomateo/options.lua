@@ -2,6 +2,7 @@
 vim.opt.background = "dark"
 vim.opt.colorcolumn = { 81, 121 }
 vim.opt.cursorline = true
+vim.opt.list = true
 vim.opt.mouse = ""
 vim.opt.number = true
 vim.opt.relativenumber = true
@@ -39,5 +40,6 @@ vim.opt.formatoptions = vim.opt.formatoptions - "2"
 vim.opt.completeopt = { "menu", "menuone", "noselect" }
 vim.opt.diffopt = { "filler", "closeoff", "hiddenoff", "internal", "algorithm:minimal" }
 vim.opt.foldmethod = "marker"
+vim.opt.ignorecase = true
 vim.opt.inccommand = "split"
 vim.opt.wildmode = "longest:full"
