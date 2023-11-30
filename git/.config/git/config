@@ -1,18 +1,16 @@
-# User configuration.
 [user]
 	name = Matthew Sanabria
 	useConfigOnly = true
 
-# Git pull configuration.
 [pull]
-	rebase = false
+	rebase = true
 
-# GitHub specific configuration.
-[includeIf "gitdir:**/github.com/**"]
+# GitHub specific configuration for SSH and HTTPS remotes.
+[includeIf "hasconfig:remote.*.url:git@github.com:*/**"]
 	path = ~/.config/git/github
-[includeIf "gitdir:~/.dotfiles/**"]
+[includeIf "hasconfig:remote.*.url:https://github.com/**"]
 	path = ~/.config/git/github
 
-# Use SSH instead of HTTPS.
+# Always use GitHub SSH URLs instead of HTTPS URLs.
 [url "git@github.com:"]
 	insteadOf = https://github.com/
