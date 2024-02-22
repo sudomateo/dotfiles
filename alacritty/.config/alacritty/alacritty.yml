@@ -1,7 +1,7 @@
 ---
 shell:
   # TODO: Conditionally set the program and args based on the operating system.
-  program: /bin/fish
+  program: /opt/homebrew/bin/fish
   args:
     - --login
     - --interactive
