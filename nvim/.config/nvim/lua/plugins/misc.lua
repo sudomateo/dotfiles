@@ -22,11 +22,11 @@ return {
             require("which-key").setup()
 
             require("which-key").register {
-                ["<leader>c"] = { name = "Code", _ = "which_key_ignore" },
-                ["<leader>d"] = { name = "Documnet", _ = "which_key_ignore" },
-                ["<leader>r"] = { name = "Rename", _ = "which_key_ignore" },
-                ["<leader>s"] = { name = "Search", _ = "which_key_ignore" },
-                ["<leader>w"] = { name = "Workspace", _ = "which_key_ignore" },
+                ["<Leader>c"] = { name = "Code", _ = "which_key_ignore" },
+                ["<Leader>d"] = { name = "Document", _ = "which_key_ignore" },
+                ["<Leader>r"] = { name = "Rename", _ = "which_key_ignore" },
+                ["<Leader>s"] = { name = "Search", _ = "which_key_ignore" },
+                ["<Leader>w"] = { name = "Workspace", _ = "which_key_ignore" },
             }
         end,
     },

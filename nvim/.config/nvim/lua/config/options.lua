@@ -32,7 +32,6 @@ vim.opt.colorcolumn = {
 vim.opt.completeopt = {
     "menu",     -- Use a popup menu.
     "preview",  -- Show extra information about the selected item.
-    -- "noinsert", -- Do not insert text until an item is selected.
     "noselect", -- Do not select an item until the user explicitly selects one.
 }
 

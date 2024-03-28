@@ -67,6 +67,11 @@ return {
                         desc = "Go to declaration",
                     })
 
+                    vim.keymap.set("n", "<Leader>cf", vim.lsp.buf.format, {
+                        buffer = event.buf,
+                        desc = "Format current buffer",
+                    })
+
                     local lsp_client = vim.lsp.get_client_by_id(event.data.client_id)
                     if lsp_client and lsp_client.server_capabilities.documentHighlightProvider then
                         -- Highlight references for the symbol under the cursor while the cursor is paused.
