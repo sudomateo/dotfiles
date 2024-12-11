@@ -1,15 +1,10 @@
 [user]
 	name = Matthew Sanabria
+	email = "me@matthewsanabria.dev"
 	useConfigOnly = true
 
 [pull]
 	rebase = true
-
-# GitHub specific configuration for SSH and HTTPS remotes.
-[includeIf "hasconfig:remote.*.url:git@github.com:*/**"]
-	path = ~/.config/git/github
-[includeIf "hasconfig:remote.*.url:https://github.com/**"]
-	path = ~/.config/git/github
 
 # Always use GitHub SSH URLs instead of HTTPS URLs.
 [url "git@github.com:"]
