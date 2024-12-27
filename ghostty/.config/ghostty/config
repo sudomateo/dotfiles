@@ -1,7 +1,7 @@
 # Use `ghostty +show-config --default --docs` to see the documentation for the
 # default configuration.
 
-command = /bin/fish --login --interactive --command 'tmux new-session -A'
+command = /bin/fish --login --interactive
 confirm-close-surface = false
 font-family = Berkeley Mono
 theme = light:GruvboxDark,dark:GruvboxDark
