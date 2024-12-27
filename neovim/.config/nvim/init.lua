@@ -5,9 +5,9 @@ vim.g.maplocalleader = " "
 require("config")
 
 -- Install the lazy plugin manager and add it to the front of the runtime path.
-local lazy_install_path = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
-if not vim.loop.fs_stat(lazy_install_path) then
-    vim.fn.system({
+local lazy_install_path = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not (vim.uv or vim.loop).fs_stat(lazy_install_path) then
+    local out = vim.fn.system({
         "git",
         "clone",
         "--filter=blob:none",
@@ -15,6 +15,16 @@ if not vim.loop.fs_stat(lazy_install_path) then
         "git@github.com:folke/lazy.nvim",
         lazy_install_path,
     })
+
+    if vim.v.shell_error ~= 0 then
+        vim.api.nvim_echo({
+            { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
+            { out, "WarningMsg" },
+            { "\nPress any key to exit..." },
+        }, true, {})
+        vim.fn.getchar()
+        os.exit(1)
+    end
 end
 vim.opt.runtimepath:prepend(lazy_install_path)
 

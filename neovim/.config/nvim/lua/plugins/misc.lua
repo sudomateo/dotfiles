@@ -18,16 +18,23 @@ return {
     {
         "folke/which-key.nvim",
         event = "VimEnter",
+        keys = {
+        },
         config = function()
             require("which-key").setup()
 
-            require("which-key").register {
-                ["<Leader>c"] = { name = "Code", _ = "which_key_ignore" },
-                ["<Leader>d"] = { name = "Document", _ = "which_key_ignore" },
-                ["<Leader>r"] = { name = "Rename", _ = "which_key_ignore" },
-                ["<Leader>s"] = { name = "Search", _ = "which_key_ignore" },
-                ["<Leader>w"] = { name = "Workspace", _ = "which_key_ignore" },
-            }
+            require("which-key").add({
+                { "<Leader>c",  group = "Code" },
+                { "<Leader>c_", hidden = true },
+                { "<Leader>d",  group = "Document" },
+                { "<Leader>d_", hidden = true },
+                { "<Leader>r",  group = "Rename" },
+                { "<Leader>r_", hidden = true },
+                { "<Leader>s",  group = "Search" },
+                { "<Leader>s_", hidden = true },
+                { "<Leader>w",  group = "Workspace" },
+                { "<Leader>w_", hidden = true },
+            })
         end,
     },
     {

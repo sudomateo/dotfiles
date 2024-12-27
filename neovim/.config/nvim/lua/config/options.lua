@@ -1,5 +1,5 @@
 vim.opt.breakindent = true
-vim.opt.clipboard = "unnamedplus"
+--vim.opt.clipboard = "unnamedplus"
 vim.opt.cursorline = true
 vim.opt.expandtab = true
 vim.opt.foldmethod = "marker"
