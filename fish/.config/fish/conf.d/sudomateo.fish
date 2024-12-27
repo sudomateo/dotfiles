@@ -11,12 +11,13 @@ set --global --export GOPATH ~/.local/gopath
 set --global --export COCKROACH_AUTO_BALLAST false
 
 # Editors.
-set --global --export VISUAL nvim
-set --global --export EDITOR nvim
+set --global --export VISUAL hx
+set --global --export EDITOR hx
 
 fish_add_path --global \
     $GOPATH/bin \
     ~/.local/go/bin \
+    ~/.local/zig \
     $CARGO_HOME/bin \
     ~/.local/bin \
     ~/bin
