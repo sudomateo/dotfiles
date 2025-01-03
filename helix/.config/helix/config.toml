@@ -2,7 +2,7 @@ theme = "gruvbox"
 
 [editor]
 mouse        = false
-shell        = ["fish", "-c"]
+shell        = ["/bin/fish", "-c"]
 line-number  = "relative"
 auto-format  = false
 bufferline   = "always"
@@ -14,7 +14,7 @@ center = ["version-control", "file-type", "read-only-indicator"]
 right  = ["diagnostics", "selections", "register", "position", "position-percentage", "file-encoding"]
 
 [editor.lsp]
-display-inlay-hints = true
+display-inlay-hints = false
 
 [editor.cursor-shape]
 normal = "block"
@@ -30,3 +30,6 @@ hidden = false
 
 [editor.indent-guides]
 render = true
+
+[editor.soft-wrap]
+enable = true
