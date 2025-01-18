@@ -1,7 +1,12 @@
 command = /bin/fish --login --interactive
 
-theme       = light:GruvboxDark,dark:GruvboxDark
-font-family = TX-02
+theme = light:GruvboxDark,dark:GruvboxDark
+
+font-family            = Berkeley Mono
+font-style             = Regular
+font-style-bold        = Bold
+font-style-italic      = Light Oblique
+font-style-bold-italic = SemiBold Oblique
 
 adjust-cell-height = 5%
 adjust-cell-width  = 0%
