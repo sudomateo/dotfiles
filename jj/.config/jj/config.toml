@@ -1,0 +1,8 @@
+[user]
+name  = "Matthew Sanabria"
+email = "me@matthewsanabria.dev"
+
+[[--scope]]
+--when.repositories = ["~/oxide"]
+[--scope.user]
+email = "matthew.sanabria@oxide.computer"
