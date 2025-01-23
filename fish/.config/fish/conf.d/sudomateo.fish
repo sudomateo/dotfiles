@@ -14,6 +14,9 @@ set --global --export COCKROACH_AUTO_BALLAST false
 set --global --export VISUAL hx
 set --global --export EDITOR hx
 
+set --global --export HELIX_RUNTIME ~/personal/helix/runtime
+set --global --export SSH_AUTH_SOCK ~/.1password/agent.sock
+
 fish_add_path --global \
     $GOPATH/bin \
     ~/.local/go/bin \
