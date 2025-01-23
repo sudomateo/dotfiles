@@ -1,2 +1,4 @@
 # This file is implicitly included as a .gitignore.
-# TODO: Populate this file with relevant entries.
+
+# A scratch directory for arbitrary things.
+.scratch
